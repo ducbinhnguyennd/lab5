@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MY APP</title>
+</head>
+
+<body>
+   
+    <form action="/uploadfile" enctype="multipart/form-data" method="POST">
+        <input type="file" name="myFile" />
+        <input type="submit" value="Upload a file" />
+    </form>
+    <p id="fileUploadStatus"></p>
+
+    <br>
+    <hr>
+    <br>
+
+    <!-- MULTIPLE FILES -->
+    <form action="/uploadmultiple" enctype="multipart/form-data" method="POST">
+        Chọn file: <input type="file" name="myFiles" multiple>
+        <input type="submit" value="Upload your files" />
+    </form>
+    <p id="multipleFileUploadStatus"></p> 
+
+    <br>
+    <hr>
+    <br>
+
+    <form action="/upload/photo" enctype="multipart/form-data" method="POST">
+        <input type="file" name="myImage" accept="image/*" />
+        <input type="submit" value="Upload Photo" />
+    </form>
+    <p id="photoUploadStatus"></p> 
+
+    <script>
+       //thong bao
+        function showStatusMessage(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+        }
+
+       
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        if (urlParams.has("singleFile")) {
+            const singleFileStatus = urlParams.get("singleFile");
+            showStatusMessage("fileUploadStatus", singleFileStatus);
+        }
+
+        if (urlParams.has("multipleFiles")) {
+            const multipleFilesStatus = urlParams.get("multipleFiles");
+            showStatusMessage("multipleFileUploadStatus", multipleFilesStatus);
+        }
+
+        if (urlParams.has("photo")) {
+            const photoStatus = urlParams.get("photo");
+            showStatusMessage("photoUploadStatus", photoStatus);
+        }
+    </script>
+</body>
+
+</html>
